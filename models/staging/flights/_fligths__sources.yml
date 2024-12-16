@@ -7,6 +7,9 @@ sources:
         columns: 
           - name: aircraft_code
             description: Код модели самолета
+            tests:
+              - not_null
+              - unique
           - name: model
             description: Название модели самолета
           - name: range
