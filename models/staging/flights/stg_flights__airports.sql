@@ -9,7 +9,6 @@ select
     city,
     coordinates,
     timezone
-
 from 
     {{ source('demo_src', 'airports') }}
 
