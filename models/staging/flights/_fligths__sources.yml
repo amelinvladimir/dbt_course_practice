@@ -38,3 +38,17 @@ sources:
             description: Номер места
           - name: fare_conditions
             description: Класс места
+      - name: bookings
+        columns:
+          - name: book_ref
+          - name: book_date
+          - name: total_amount
+        freshness:
+          warn_after:
+            count: 600000
+            period: hour
+          error_after:
+            count: 10000
+            period: day
+        loaded_at_field: book_date::timestamp
+      
