@@ -3,17 +3,19 @@ sources:
     description: Данные из БД авиаперелетов
     tables:
       - name: aircrafts
-        description: Модели самолетов
+        description: '{{ doc("aircrafts_description") }}'
         columns: 
           - name: aircraft_code
-            description: Код модели самолета
+            description: >
+              Код модели самолета.
+              Состоит из 3 латинских букв.
             tests:
               - not_null
               - unique
           - name: model
             description: Название модели самолета
           - name: range
-            description: Неизвестное поле
+            description: "_Неизвестное поле_"
       - name: airports
         description: Аэропорты
         columns: 
