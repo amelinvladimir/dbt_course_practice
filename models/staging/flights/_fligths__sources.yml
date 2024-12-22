@@ -51,4 +51,47 @@ sources:
             count: 10000
             period: day
         loaded_at_field: book_date::timestamp
+      - name: flights
+        description: Рейсы самолетов из одного аэропорта в другой. Рейсы с одним номером имеют одинаковые пункты вылета и назначения, но будут отличаться датой отправления.
+        columns:
+          - name: flight_id
+            tests:
+              - not_null
+              - unique
+          - name: status
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['Departed', 'Arrived', 'On Time', 'Cancelled', 'Delayed', 'Scheduled']
+      - name: ticket_flights
+        description: Одна строка в таблице соответствует одному перелету. Билет включает один или несколько перелетов (ticket_flights). Несколько перелетов могут включаться в билет в случаях, когда нет прямого рейса, соединяющего пункты отправления и назначения (полет с пересадками), либо когда билет взят «туда и обратно». В схеме данных нет жёсткого ограничения, но предполагается, что все билеты в одном бронировании имеют одинаковый набор перелетов.
+        columns:
+          - name: ticket_no
+            tests:
+              - not_null
+          - name: flight_id
+            tests:
+              - relationships:
+                  to: ref('stg_flights__flights')
+                  field: flight_id
+      - name: boarding_passes
+        description: Посадочный талон, выдаваемый при регистрации на рейс, в котором указано место в самолете. Пассажир может зарегистрироваться только на тот рейс, который есть у него в билете. Комбинация рейса и места в самолете должна быть уникальной, чтобы не допустить выдачу двух посадочных талонов на одно место.
+        columns:
+          - name: ticket_no
+            tests:
+              - not_null
+              - relationships:
+                  to: ref('stg_flights__ticket_flights')
+                  field: ticket_no
+          - name: flight_id
+            tests:
+              - relationships:
+                  to: ref('stg_flights__flights')
+                  field: flight_id
+          - name: boarding_no
+            tests:
+              - not_null
+          - name: seat_no
+            tests:
+              - not_null
       

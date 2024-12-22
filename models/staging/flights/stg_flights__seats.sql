@@ -3,11 +3,10 @@
         materialized = 'table'
     )
 }}
-select
+SELECT
     aircraft_code,
     seat_no,
     fare_conditions
-
-from 
+FROM 
     {{ source('demo_src', 'seats') }}
   
