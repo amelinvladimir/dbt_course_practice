@@ -94,4 +94,6 @@ sources:
           - name: seat_no
             tests:
               - not_null
+      - name: tickets
+        description: Билеты
       
