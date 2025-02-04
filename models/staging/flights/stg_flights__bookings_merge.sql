@@ -18,3 +18,4 @@ FROM
 WHERE 
     book_date > (SELECT MAX(book_date) FROM {{ source('demo_src', 'bookings') }}) - interval '97 day'
 {% endif %}
+{# comment #}
