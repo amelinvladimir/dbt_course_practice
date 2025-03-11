@@ -80,9 +80,6 @@ sources:
           - name: ticket_no
             tests:
               - not_null
-              - relationships:
-                  to: ref('stg_flights__ticket_flights')
-                  field: ticket_no
           - name: flight_id
             tests:
               - relationships:

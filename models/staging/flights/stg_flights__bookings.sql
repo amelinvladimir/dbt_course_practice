@@ -10,3 +10,4 @@ SELECT
     total_amount
 FROM
     {{ source('demo_src', 'bookings') }}
+{{ limit_data_dev('book_date') }}
