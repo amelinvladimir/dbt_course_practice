@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: stg_flights__seats
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - aircraft_code
+            - seat_no
+              
