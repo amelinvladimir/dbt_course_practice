@@ -56,4 +56,5 @@ seeds:
   dbt_course_practice:
     schema: seeds
 
-on-run-end: "{{ log_results(results) }}"
+on-run-end: "{{ log_results(results) }}
+             {{ dbt_project_evaluator.print_dbt_project_evaluator_issues() }}"
