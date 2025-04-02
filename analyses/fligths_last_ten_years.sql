@@ -1,10 +1,8 @@
-{% set current_date = run_started_at | string | truncate(10, True, "")   %}
-{% set current_year = run_started_at | string | truncate(4, True, "") | int  %}
-{% set prev_year = current_year - 10 %}
-
-SELECT 
-    COUNT(*)
-FROM
-    {{ ref('fct_fligths') }}
-WHERE 
-    scheduled_departure BETWEEN '{{ current_date }}' AND '{{ current_date | replace(current_year, prev_year) }}'
+{% set date_today = run_started_at|string() %}
+ {% set prev_year = run_started_at.year|int - 10|int %}
+ {% set prev_date = prev_year ~ date_today[4:]|string() %}
+  
+ SELECT 
+     COUNT(scheduled_departure)
+ FROM {{ ref('fct_fligths') }}
+ WHERE scheduled_departure BETWEEN '{{prev_date}}' and '{{ date_today }}'
