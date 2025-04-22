@@ -15,3 +15,16 @@ models:
                 severity: warn
                 warn_if: ">200"
                 where: "seat_no > '18A'"
+          - not_null
+          - seat_no_pattern
+      - name: aircraft_code
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_flights__aircrafts')
+              field: aircraft_code
+      - name: fare_conditions
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Business', 'Comfort', 'Economy']
