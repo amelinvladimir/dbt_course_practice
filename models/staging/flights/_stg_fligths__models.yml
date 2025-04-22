@@ -7,4 +7,11 @@ models:
           combination_of_columns:
             - aircraft_code
             - seat_no
-              
+    columns:
+      - name: seat_no
+        data_tests: 
+          - unique:
+              config:
+                severity: warn
+                warn_if: ">200"
+                where: "seat_no > '18A'"
