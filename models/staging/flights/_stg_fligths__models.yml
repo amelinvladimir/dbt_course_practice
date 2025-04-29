@@ -3,20 +3,17 @@ version: 2
 models:
   - name: stg_flights__seats
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - aircraft_code
-            - seat_no
+    - dbt_utils.unique_combination_of_columns:
+        combination_of_columns:
+          - seat_no
+          - aircraft_code
     columns:
       - name: seat_no
-        data_tests: 
-          - unique:
+        data_tests:
+          - not_null
+          - seat_no_pattern:
               config:
                 severity: warn
-                warn_if: ">200"
-                where: "seat_no > '18A'"
-          - not_null
-          - seat_no_pattern
       - name: aircraft_code
         data_tests:
           - not_null

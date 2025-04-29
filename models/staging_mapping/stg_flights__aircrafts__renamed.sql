@@ -1,0 +1,1 @@
+{{ genarate_renamed_model('aircrafts') }} 
